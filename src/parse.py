@@ -6,6 +6,7 @@ CAR_ATTRIBUTE_BY_ID = {
     3: "size",
     4: "direction",
     6: "value",
+    7: "appearance",
     8: "dimension1",
     9: "dimension2",
     10: "state",
