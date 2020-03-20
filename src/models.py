@@ -14,18 +14,21 @@ class Model(object):
     custom = []
 
     def __init__(self, **kwargs):
+        self.metadata_size = 0
         for field, _ in self.__class__.fields:
             setattr(self, field, kwargs.get(field))
 
     @classmethod
     def make(cls, stream, **kwargs):
         instance = cls()
+        start = stream.tell()
         for field, unpack in cls.fields:
             setattr(instance, field, unpack(instance, stream))
 
         for key, value in kwargs.iteritems():
             setattr(instance, key, value)
 
+        instance.metadata_size = stream.tell() - start
         return instance
 
     @classmethod
